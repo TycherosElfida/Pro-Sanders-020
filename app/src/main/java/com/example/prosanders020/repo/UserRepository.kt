@@ -8,4 +8,6 @@ interface UserRepository {
     suspend fun getUserWithNim(nim: String): User?
     suspend fun register(user: User)
     suspend fun deleteUser(user: User)
+    suspend fun updateUser(user: User)
+
 }
