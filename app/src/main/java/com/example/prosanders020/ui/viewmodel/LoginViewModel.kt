@@ -17,7 +17,9 @@ data class LoginUiState(
     val nim: String = "",
     val password: String = "",
     val isLoading: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    val passwordVisible: Boolean = false,
+    val rememberMe: Boolean = false
 )
 
 @HiltViewModel
@@ -39,6 +41,14 @@ class LoginViewModel @Inject constructor(
         _uiState.update { it.copy(password = password, error = null) }
     }
 
+    fun onTogglePasswordVisibility() {
+        _uiState.update { it.copy(passwordVisible = !it.passwordVisible) }
+    }
+
+    fun onRememberMeChanged(isChecked: Boolean) {
+        _uiState.update { it.copy(rememberMe = isChecked) }
+        // TODO: Add logic here to save token to DataStore if isChecked is true
+    }
     fun onLoginClicked() {
         val state = _uiState.value
 
@@ -51,15 +61,11 @@ class LoginViewModel @Inject constructor(
             try {
                 _uiState.update { it.copy(isLoading = true) }
 
-                // 1. Get user by NIM
                 val user = repository.getUserWithNim(state.nim)
 
-                // 2. Verify user and password
                 if (user != null && BCrypt.checkpw(state.password, user.passwordHash)) {
-                    // Success!
                     _eventFlow.emit(UiEvent.NavigationSuccess)
                 } else {
-                    // Failure
                     _eventFlow.emit(UiEvent.ShowToast("Invalid NIM or Password"))
                 }
             } catch (e: Exception) {

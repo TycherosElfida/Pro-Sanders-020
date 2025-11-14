@@ -51,7 +51,6 @@ class UserListViewModel @Inject constructor(
     }
 
     fun onUpdateUserClicked(user: User) {
-        // Open the dialog and pre-fill the text field
         _userBeingEdited.value = user
         _editDialogName.value = user.nama
     }
@@ -65,7 +64,6 @@ class UserListViewModel @Inject constructor(
         val newName = _editDialogName.value
 
         if (newName.isBlank()) {
-            // Optional: Send a toast event for error
             return
         }
 
@@ -73,7 +71,7 @@ class UserListViewModel @Inject constructor(
             repository.updateUser(
                 userToUpdate.copy(nama = newName)
             )
-            onEditDialogDismiss() // Close dialog on success
+            onEditDialogDismiss()
         }
     }
 

@@ -21,6 +21,8 @@ jbcrypt = "0.4"
 navigationCompose = "2.9.6"
 kotlinxSerialization = "1.9.0"
 lifecycle = "2.9.4"
+kotlinxCoroutinesTest = "1.10.2"
+mockk = "1.14.6"
 
 [libraries]
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
@@ -51,6 +53,8 @@ jbcrypt = { module = "org.mindrot:jbcrypt", version.ref = "jbcrypt" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

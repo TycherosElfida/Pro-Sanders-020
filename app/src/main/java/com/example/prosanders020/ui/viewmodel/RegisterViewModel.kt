@@ -30,11 +30,9 @@ class RegisterViewModel @Inject constructor(
     private val repository: UserRepository
 ) : ViewModel() {
 
-    // 1. STATE (StateFlow)
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState = _uiState.asStateFlow()
 
-    // 2. EVENTS (SharedFlow)
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
@@ -59,7 +57,6 @@ class RegisterViewModel @Inject constructor(
     fun onRegisterClicked() {
         val state = _uiState.value
 
-        // 3. Validation Logic (hoisted from the UI)
         val nimError = if (state.nim.isBlank()) "NIM tidak boleh kosong" else null
         val namaError = if (state.nama.isBlank()) "Nama tidak boleh kosong" else null
         val passwordError = if (state.password.isBlank()) "Password tidak boleh kosong" else null
@@ -79,7 +76,6 @@ class RegisterViewModel @Inject constructor(
             try {
                 _uiState.update { it.copy(isLoading = true) }
 
-                // 5. Secure Password Hashing
                 val hashedPass = BCrypt.hashpw(state.password, BCrypt.gensalt())
 
                 val secureUser = User(
@@ -90,7 +86,6 @@ class RegisterViewModel @Inject constructor(
 
                 repository.register(secureUser)
 
-                // 6. Emit events to the UI
                 _eventFlow.emit(UiEvent.ShowToast("Data berhasil disimpan"))
                 _eventFlow.emit(UiEvent.NavigationSuccess)
 

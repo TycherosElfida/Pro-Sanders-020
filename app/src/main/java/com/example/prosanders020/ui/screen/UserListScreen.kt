@@ -107,8 +107,8 @@ fun UserCard(
             Button(
                 onClick = onUpdateClick,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFC5CAE9), // V1.0 "biru muda"
-                    contentColor = Color(0xFF303F9F)  // V1.0 "teks biru tua"
+                    containerColor = Color(0xFFC5CAE9),
+                    contentColor = Color(0xFF303F9F)
                 )
             ) {
                 Text("Update")
