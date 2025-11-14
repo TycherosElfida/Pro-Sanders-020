@@ -25,7 +25,7 @@ object RouteUserList
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: Any = RouteLogin // App starts at Login
+    startDestination: Any = RouteLogin
 ) {
     NavHost(
         navController = navController,
@@ -34,10 +34,10 @@ fun AppNavHost(
     ) {
         composable<RouteLogin> {
             LoginScreen(
-                viewModel = hiltViewModel(), // Hilt provides the VM
+                viewModel = hiltViewModel(),
                 onLoginSuccess = {
                     navController.navigate(RouteUserList) {
-                        popUpTo(RouteLogin) { inclusive = true } // Clear login from back stack
+                        popUpTo(RouteLogin) { inclusive = true }
                     }
                 },
                 onRegisterClick = { navController.navigate(RouteRegister) }
@@ -49,7 +49,7 @@ fun AppNavHost(
                 viewModel = hiltViewModel(),
                 onRegisterSuccess = {
                     navController.navigate(RouteLogin) {
-                        popUpTo(RouteRegister) { inclusive = true } // Go back to Login
+                        popUpTo(RouteRegister) { inclusive = true }
                     }
                 }
             )
@@ -60,7 +60,7 @@ fun AppNavHost(
                 viewModel = hiltViewModel(),
                 onNavigateBackToLogin = {
                     navController.navigate(RouteLogin) {
-                        popUpTo(RouteUserList) { inclusive = true } // Clear list from back stack
+                        popUpTo(RouteUserList) { inclusive = true }
                     }
                 }
             )
